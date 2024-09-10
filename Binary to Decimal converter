@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class BinaryToDecimalConverter {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a binary number: ");
+        String binaryString = scanner.nextLine();
+
+        try {
+            int decimalNumber = binaryToDecimal(binaryString);
+            System.out.println("The decimal equivalent of binary " + binaryString + " is: " + decimalNumber);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid binary number. Please enter a valid binary number.");
+        }
+
+        scanner.close();
+    }
+
+    public static int binaryToDecimal(String binaryString) {
+        int decimalNumber = 0;
+        int base = 1; 
+
+        for (int i = binaryString.length() - 1; i >= 0; i--) {
+            char binaryChar = binaryString.charAt(i);
+
+            if (binaryChar == '1') {
+                decimalNumber += base;
+            } else if (binaryChar != '0') {
+                throw new NumberFormatException("Invalid character in binary number.");
+            }
+
+            base *= 2;  
+        }
+
+        return decimalNumber;
+    }
+}
